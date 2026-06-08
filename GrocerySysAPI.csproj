@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.8" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="GrocerySysAppService">
+      <HintPath>..\GrocerySys\bin\Debug\net10.0\GrocerySysAppService.dll</HintPath>
+    </Reference>
+    <Reference Include="GrocerySysDataService">
+      <HintPath>..\GrocerySys\bin\Debug\net10.0\GrocerySysDataService.dll</HintPath>
+    </Reference>
+    <Reference Include="GrocerySysModels">
+      <HintPath>..\GrocerySys\bin\Debug\net10.0\GrocerySysModels.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
