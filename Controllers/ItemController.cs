@@ -47,16 +47,12 @@ namespace GrocerySysAPI.Controllers
             var newItemData = new GrocerySysModels.Items
             {
                 ItemId = "",
-                ItemName = itemDto.ItemName ?? "Unnamed Item", // Fallback if name is missing
+                ItemName = itemDto.ItemName ?? "Unnamed Item", 
                 ItemLocation = itemDto.ItemLocation ?? "Unknown Location",
-
-                // FIXES FOR CS0266: Use ?? to provide defaults if the properties are null
                 ItemQuantity = itemDto.ItemQuantity ?? 0,
                 CostPrice = itemDto.CostPrice ?? 0.00m,
                 SellingPrice = itemDto.SellingPrice ?? 0.00m,
                 WeightValue = itemDto.WeightValue ?? 0.0,
-
-                // Fallback to position 0 of enums if null
                 Department = (GrocerySysModels.ProductDepartment)(itemDto.Department ?? 0),
                 Unit = (GrocerySysModels.MeasurementUnit)(itemDto.Unit ?? 0),
 
@@ -100,7 +96,6 @@ namespace GrocerySysAPI.Controllers
                 _appService.UpdateItemLocation(id, itemDto.ItemLocation);
             }
 
-            // FIXES FOR CS1503: Appending .Value explicitly passes down decimal/double rather than decimal?/double?
             if (itemDto.CostPrice.HasValue && itemDto.CostPrice > 0)
             {
                 _appService.UpdateItemCostPrice(id, itemDto.CostPrice.Value);
@@ -137,16 +132,14 @@ namespace GrocerySysAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteItem(string id)
         {
-            // 1. Attempt to execute the deletion through your service layer
             bool successfullyDeleted = _appService.DeleteItem(id);
 
-            // 2. If the service layer returns false, it means the item ID wasn't found
+           
             if (!successfullyDeleted)
             {
                 return NotFound(new { Message = $"Cannot delete. Item with ID '{id}' does not exist." }); // HTTP 404
             }
 
-            // 3. Return HTTP 204 No Content because the resource has been successfully wiped out
             return NoContent(); // HTTP 204
         }
     }
